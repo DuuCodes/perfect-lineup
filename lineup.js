@@ -1,10 +1,24 @@
 function calculateTotalSalary(lineup) {
-  return 0
+  return lineup.reduce((salary, player) => {
+    if(!salary[player.salary]) {
+  salary[player.salaryId] = 16900
+    };
+    salary[player.salary] = salary[player.salary] + 1
+  return salary
+  }, {})
 }
+  
 
 function getPositionCounts(lineup) {
-  return {}
+return lineup.reduce((positions, player) => {
+  if (!positions[player.positions]) {
+postions[player.positions] = 0
+  }
+  positions[player.position] = positions[player.positions] + 1
+return positions
+}, {})
 }
+
 
 function getGameCounts(lineup) {
   return lineup.reduce((games, player) => {
@@ -13,12 +27,14 @@ function getGameCounts(lineup) {
   }, {})
 }
 
+
 function getTeamCounts(lineup) {
   return lineup.reduce((teams, player) => {
     teams[player.teamId] = teams[player.teamId] === undefined ? 1 : teams[player.teamId] + 1
     return teams
   }, {})
 }
+
 
 function violatesGameCount(games) {
   return Object.values(games).some((count) => { return count > 3 })
@@ -42,9 +58,10 @@ function validateLineup(lineup) {
   const gameCounts = getGameCounts(lineup)
   const teamCounts = getTeamCounts(lineup)
   const positionCounts = getPositionCounts(lineup)
+  
 
   return !violatesGameCount(gameCounts) && !violatesSalary(lineup) &&
-    !violatesTeamCount(teamCounts) && !violatesPositionCount(positionCounts)
+    !violatesTeamCount(teamCounts) && !violatesPositionCount(positionCounts) 
 }
 
 module.exports = {
