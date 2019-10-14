@@ -1,10 +1,16 @@
 function calculateTotalSalary(lineup) {
-  return 0
+return lineup.reduce((total,player) => {
+   return total + player.salary
+  }, 0)
 }
 
 function getPositionCounts(lineup) {
-  return {}
+  return lineup.reduce((position,player) => {
+    position[player.position] = position[player.position] === undefined ? 1 : position[player.position] + 1
+  return position
+}, {})
 }
+
 
 function getGameCounts(lineup) {
   return lineup.reduce((games, player) => {
