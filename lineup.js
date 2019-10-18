@@ -3,6 +3,7 @@ return lineup.reduce((total,player) => {
    return total + player.salary
   }, 0)
 }
+  
 
 function getPositionCounts(lineup) {
   return lineup.reduce((position,player) => {
@@ -19,12 +20,14 @@ function getGameCounts(lineup) {
   }, {})
 }
 
+
 function getTeamCounts(lineup) {
   return lineup.reduce((teams, player) => {
     teams[player.teamId] = teams[player.teamId] === undefined ? 1 : teams[player.teamId] + 1
     return teams
   }, {})
 }
+
 
 function violatesGameCount(games) {
   return Object.values(games).some((count) => { return count > 3 })
@@ -48,9 +51,10 @@ function validateLineup(lineup) {
   const gameCounts = getGameCounts(lineup)
   const teamCounts = getTeamCounts(lineup)
   const positionCounts = getPositionCounts(lineup)
+  
 
   return !violatesGameCount(gameCounts) && !violatesSalary(lineup) &&
-    !violatesTeamCount(teamCounts) && !violatesPositionCount(positionCounts)
+    !violatesTeamCount(teamCounts) && !violatesPositionCount(positionCounts) 
 }
 
 module.exports = {
